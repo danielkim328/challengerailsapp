@@ -23,14 +23,11 @@ class MapsController < ApplicationController
     if params[:limit]
       limit_clause += " LIMIT #{params[:limit]} "
     end
-
     user_sql += limit_clause
 
     # Get user ids from database
     @user_data = ActiveRecord::Base.connection.execute(user_sql)
-  
     user_ids = []
-
     @user_data.each do |row| 
       user_ids.push(row["id"])
     end
